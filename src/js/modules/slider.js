@@ -14,11 +14,27 @@ export default class Slider {
          this.slideIndex = this.slides.length;
       }
 
+
       this.slides.forEach(slide => {
-         slide.classList.add("animated", "fadeInUp");
+         slide.classList.add("animated", "slideInUp");
          slide.style.display = 'none';
       });
       this.slides[this.slideIndex - 1].style.display = 'block';
+
+      // Show block setTimeout
+      try {
+         this.hanson.style.opacity = '0';
+
+         if (n === 3) {
+            this.hanson.classList.add('animated');
+            setTimeout(() => {
+               this.hanson.style.opacity = '1';
+               this.hanson.classList.add('slideInUp');
+            }, 3000);
+         } else {
+            this.hanson.classList.remove('slideInUp');
+         }
+      } catch (error) {}
    }
 
    plusSlides(n) {
@@ -26,18 +42,24 @@ export default class Slider {
    }
 
    render() {
+
+      try {
+         this.hanson = document.querySelector('.hanson');
+      } catch (err) {}
+
       this.btns.forEach(btn => {
          btn.addEventListener('click', () => {
             this.plusSlides(1);
          });
 
-         btn.parentNode.previousElementSibling.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.slideIndex = 1;
-            this.showSlides(this.slideIndex);
-            this.slides[this.slideIndex - 1].classList.remove("fadeInUp");
-            this.slides[this.slideIndex - 1].classList.add("fadeInDown");
-         });
+         btn.parentNode.previousElementSibling
+            .addEventListener('click', (e) => {
+               e.preventDefault();
+               this.slideIndex = 1;
+               this.showSlides(this.slideIndex);
+               this.slides[this.slideIndex - 1].classList.remove("slideInUp");
+               this.slides[this.slideIndex - 1].classList.add("slideInDown");
+            });
       });
 
       this.showSlides(this.slideIndex);
