@@ -2844,15 +2844,14 @@ function () {
     key: "bindTriggrers",
     value: function bindTriggrers(container, items, counter) {
       container.querySelector('.card__click').addEventListener('click', function () {
+        items[counter].classList.add("animated", "flipInX");
+
         if (counter != items.length - 2) {
           items[counter].style.display = 'flex';
-          items[counter].classList.add('flipInX');
           counter++;
         } else {
           items[counter].style.display = 'flex';
-          items[items.length - 1].style.display = 'none'; // items[items.length - 1].remove();
-
-          items[counter].classList.add('flipInX');
+          items[items.length - 1].remove();
         }
       });
     }
@@ -2860,8 +2859,6 @@ function () {
     key: "hideItems",
     value: function hideItems(items) {
       items.forEach(function (item, i, arr) {
-        item.classList.add('animated');
-
         if (i != arr.length - 1) {
           item.style.display = 'none';
         }

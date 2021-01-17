@@ -12,22 +12,19 @@ export default class Difference {
 
    bindTriggrers(container, items, counter) {
       container.querySelector('.card__click').addEventListener('click', () => {
+         items[counter].classList.add("animated", "flipInX");
          if (counter != items.length - 2) {
             items[counter].style.display = 'flex';
-            items[counter].classList.add('flipInX');
             counter++;
          } else {
             items[counter].style.display = 'flex';
-            items[items.length - 1].style.display = 'none';
-            // items[items.length - 1].remove();
-            items[counter].classList.add('flipInX');
+            items[items.length - 1].remove();
          }
       });
    }
 
    hideItems(items) {
       items.forEach((item, i, arr) => {
-         item.classList.add('animated');
          if (i != arr.length - 1) {
             item.style.display = 'none';
          }
