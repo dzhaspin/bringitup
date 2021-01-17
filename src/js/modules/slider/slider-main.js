@@ -1,10 +1,10 @@
 import Slider from './slider';
 
 export default class MainSlider extends Slider {
-   constructor(page, btns) {
-      super(page, btns);
+   constructor(btns) {
+      super(btns);
    }
-   
+
    showSlides(n) {
       if (n > this.slides.length) {
          this.slideIndex = 1;
@@ -40,7 +40,7 @@ export default class MainSlider extends Slider {
       this.showSlides(this.slideIndex += n);
    }
 
-   render() {
+   render() { 
 
       try {
          this.hanson = document.querySelector('.hanson');
