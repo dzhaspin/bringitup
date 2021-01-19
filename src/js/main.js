@@ -5,6 +5,9 @@ import Difference from './modules/difference';
 import Forms from './modules/forms';
 
 window.addEventListener('DOMContentLoaded', () => {
+
+   'use strict';
+
    const slider = new MainSlider({
       container: ".page",
       btns: ".next"

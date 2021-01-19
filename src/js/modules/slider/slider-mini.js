@@ -60,19 +60,21 @@ export default class MainSlider extends Slider {
 
    init() {
       // console.log(this.container, this.next, this.prev);
-      this.container.style.cssText = `
-         display: flex;
-         flex-wrap: wrap;
-         overflow: hidden;
-         align-items: flex-start;
-      `;
+      try {
+         this.container.style.cssText = `
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            align-items: flex-start;
+         `;
 
-      this.bindTriggers();
-      this.decorizeSlides();
+         this.bindTriggers();
+         this.decorizeSlides();
 
-      if (this.autoplay) {
-         setInterval(() => this.nextSlide(), 5000);
-      }
+         if (this.autoplay) {
+            setInterval(() => this.nextSlide(), 5000);
+         }
+      } catch (e) {}
    }
 
 }
