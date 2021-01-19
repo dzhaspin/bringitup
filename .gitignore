@@ -1,3 +1,4 @@
 node_modules
+.jshintrc
 debug.log
 package-lock.json
