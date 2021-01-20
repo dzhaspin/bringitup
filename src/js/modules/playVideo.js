@@ -43,7 +43,9 @@ export default class VideoPlayer {
    closeBtn() {
       this.close.addEventListener('click', () => {
          this.overlay.style.display = 'none';
-         this.player.stopVideo();
+         try {
+            this.player.stopVideo();
+         } catch (e) {}
       });
    }
 
@@ -83,17 +85,17 @@ export default class VideoPlayer {
    }
 
    init() {
-      if (this.btns.length > 0) {
-         const tag = document.createElement('script');
+      try {
+         if (this.btns.length > 0) {
+            const tag = document.createElement('script');
 
-         try {
             tag.src = "https://www.youtube.com/iframe_api";
             const firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
             this.playBtn();
             this.closeBtn();
-         } catch (e) {}
-      }
+         }
+      } catch (e) {}
    }
 }

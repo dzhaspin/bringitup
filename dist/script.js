@@ -5080,6 +5080,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_difference__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/difference */ "./src/js/modules/difference.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showInfo */ "./src/js/modules/showInfo.js");
+/* harmony import */ var _modules_downloadFile__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/downloadFile */ "./src/js/modules/downloadFile.js");
+
 
 
 
@@ -5129,6 +5131,7 @@ window.addEventListener('DOMContentLoaded', function () {
   new _modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"]('.form').init(); // new Showtext('.plus__content').init();
 
   new _modules_showInfo__WEBPACK_IMPORTED_MODULE_5__["default"]('.plus__content').init();
+  new _modules_downloadFile__WEBPACK_IMPORTED_MODULE_6__["default"]('.download').init();
 });
 
 /***/ }),
@@ -5206,6 +5209,74 @@ function () {
   }]);
 
   return Difference;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/js/modules/downloadFile.js":
+/*!****************************************!*\
+  !*** ./src/js/modules/downloadFile.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DownloadFile; });
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DownloadFile =
+/*#__PURE__*/
+function () {
+  function DownloadFile(triggers) {
+    _classCallCheck(this, DownloadFile);
+
+    this.btns = document.querySelectorAll(triggers);
+    this.path = 'assets/img/mainbg.jpg';
+  }
+
+  _createClass(DownloadFile, [{
+    key: "downloadItem",
+    value: function downloadItem(path) {
+      var link = document.createElement('a');
+      link.setAttribute('href', path);
+      link.setAttribute('download', 'document.pdf');
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click(function (e) {
+        e.preventDefault();
+      }); // link.click((e) => {
+      //    e.preventDefault();
+      //    e.stopPropagation();
+      //    e.stopImmediatePropagation();
+      // });
+
+      document.body.removeChild(link);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      this.btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          _this.downloadItem(_this.path);
+        });
+      });
+    }
+  }]);
+
+  return DownloadFile;
 }();
 
 
@@ -5486,7 +5557,9 @@ function () {
       this.close.addEventListener('click', function () {
         _this2.overlay.style.display = 'none';
 
-        _this2.player.stopVideo();
+        try {
+          _this2.player.stopVideo();
+        } catch (e) {}
       });
     }
   }, {
@@ -5526,17 +5599,16 @@ function () {
   }, {
     key: "init",
     value: function init() {
-      if (this.btns.length > 0) {
-        var tag = document.createElement('script');
-
-        try {
+      try {
+        if (this.btns.length > 0) {
+          var tag = document.createElement('script');
           tag.src = "https://www.youtube.com/iframe_api";
           var firstScriptTag = document.getElementsByTagName('script')[0];
           firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
           this.playBtn();
           this.closeBtn();
-        } catch (e) {}
-      }
+        }
+      } catch (e) {}
     }
   }]);
 
